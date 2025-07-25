@@ -5,8 +5,8 @@ This project is focused on artificial intelligence and includes various function
 
 ## Project Structure
 
-```text
-ai/
+```
+gemini-chat-client/
 ├── src/
 │   ├── lib/
 │   │   ├── __init__.py
@@ -31,12 +31,14 @@ The project includes a comprehensive test suite using Python's unittest framewor
 - Logging system (critical, error, info levels)
 
 To run the tests:
+- The command should be executed when in the `gemini-chat-client` directory
+
 ```bash
 python -m unittest -v test
 ```
 
 ## Installation
-To set up the project, you need to install the required dependencies. You can do this by running the following command in your terminal:
+To set up the project, you need to install the required dependencies. You can do this by running the following command in your terminal while in the `gemini-chat-client` directory:
 
 ```bash
 pip install -r requirements.txt
@@ -89,6 +91,3 @@ python run.py
 
 ## Contributing
 Contributions are welcome! If you have suggestions for improvements or new features, please feel free to submit a pull request.
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
