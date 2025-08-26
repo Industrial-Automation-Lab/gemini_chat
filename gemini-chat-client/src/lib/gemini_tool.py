@@ -170,6 +170,11 @@ Welcome to [{self.model}] Chat Client!
     
         while True:
             text = input("\nEnter your prompt: ")
+            # FIX: Handle 'exit' early before contacting the model or writing files.
+            if text.strip().lower() == "exit":
+                print("Exiting chat...")
+                print(f"Chat history saved to [{self.history_file.name}]")
+                raise SystemExit
             prompt = f"""chat history: {self.context[-self.context_window:]}
 Instruction: 
     1. Always check the 'chat history' for context only.
@@ -180,13 +185,16 @@ Instruction:
             response = self.respond(prompt)
             status = self.update_history(prompt, response)
     
+            # FIX: Ensure the 'chat' directory exists before writing the response file.
+            Path("chat").mkdir(parents=True, exist_ok=True)
             file = Path(f"chat/response.csv")
             with file.open("w", encoding="utf-8") as f:
                 f.write(response)
                 f.seek(0, 2)
             
-            if status == "exit" or prompt.lower() == "exit":
+            # FIX: Rely solely on status for quota-based exit; user 'exit' is handled earlier.
+            if status == "exit":
                 print("Exiting chat...")
                 print(f"Chat history saved to [{self.history_file.name}]")
-                exit()
+                raise SystemExit
         return self.model
